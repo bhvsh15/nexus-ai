@@ -1,3 +1,5 @@
 pydantic-settings
 sqlmodel
 ollama
+FastAPI
+uvicorn[standard]
