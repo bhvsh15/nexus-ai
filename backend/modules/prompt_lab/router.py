@@ -70,3 +70,10 @@ def run_eval(version_id: int, body: RunEvalRequest, session: SessionDep):
         return service.run_eval(session, version_id, body.variables, body.model)
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
+
+@router.get("/prompts/{name}/production", response_model=PromptVersion)
+def get_production_prompt(name: str, session: SessionDep):
+    version = service.get_production_version(session, name)
+    if not version:
+        raise HTTPException(status_code=404, detail="No production version found for this prompt")
+    return version

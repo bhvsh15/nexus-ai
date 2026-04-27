@@ -19,7 +19,6 @@ def get_prompt_by_id(session: Session, prompt_id: int) -> Prompt | None:
     return session.get(Prompt, prompt_id)
 
 def commit_version(session: Session, prompt_id: int, content: str, commit_message: str) -> PromptVersion:
-    # Get the latest version number for the prompt
     latest_version = session.exec(
         select(PromptVersion).where(PromptVersion.prompt_id == prompt_id).order_by(PromptVersion.version_number.desc())
     ).first()
@@ -90,6 +89,18 @@ Response: {output}"""
             reason = line.split(":", 1)[1].strip()
 
     return score, reason
+
+
+def get_production_version(session: Session, prompt_name: str) -> PromptVersion | None:
+    prompt = session.exec(select(Prompt).where(Prompt.name == prompt_name)).first()
+    if not prompt:
+        return None
+    return session.exec(
+        select(PromptVersion)
+        .where(PromptVersion.prompt_id == prompt.id)
+        .where(PromptVersion.stage == "production")
+        .order_by(PromptVersion.version_number.desc())
+    ).first()
 
 
 def run_eval(session: Session, version_id: int, variables: dict, model: str) -> EvalRun:
