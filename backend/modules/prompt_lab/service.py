@@ -1,6 +1,9 @@
-from sqlmodel import Session,select
-from .models import Prompt, PromptVersion
+from sqlmodel import Session, select
+from .models import Prompt, PromptVersion, EvalRun
 from datetime import datetime
+from jinja2 import Template
+from core.ollama_client import chat
+import json
 
 def create_prompt(session: Session, name: str, description: str = "") -> Prompt:
     prompt = Prompt(name=name, description=description)
@@ -58,3 +61,57 @@ def promote_version(session: Session, version_id: int, target_stage: str) -> Pro
     session.refresh(version)
     
     return version
+
+def render_prompt(content: str, input_variables: dict) -> str:
+    template = Template(content)
+    return template.render(**input_variables)
+
+def judge_output(rendered_prompt: str, output: str) -> tuple[float, str]:
+    judge_prompt = f"""You are an evaluator. Rate the quality of this response from 0.0 to 1.0.
+Reply in this exact format:
+SCORE: 0.8
+REASON: The response was clear and accurate.
+
+Prompt: {rendered_prompt}
+Response: {output}"""
+
+    response = chat(model="gemma4:e2b", messages=[{"role": "user", "content": judge_prompt}])
+    text = response.message.content
+
+    score = 0.5
+    reason = ""
+    for line in text.strip().split("\n"):
+        if line.startswith("SCORE:"):
+            try:
+                score = float(line.split(":")[1].strip())
+            except ValueError:
+                pass
+        elif line.startswith("REASON:"):
+            reason = line.split(":", 1)[1].strip()
+
+    return score, reason
+
+
+def run_eval(session: Session, version_id: int, variables: dict, model: str) -> EvalRun:
+    version = session.get(PromptVersion, version_id)
+    if not version:
+        raise ValueError("PromptVersion not found")
+
+    rendered = render_prompt(version.content, variables)
+    response = chat(model=model, messages=[{"role": "user", "content": rendered}])
+    output = response.message.content
+
+    score, reason = judge_output(rendered, output)
+
+    eval_run = EvalRun(
+        prompt_version_id=version_id,
+        input_variables=json.dumps(variables),
+        rendered_prompt=rendered,
+        output=output,
+        score=score,
+        score_reason=reason
+    )
+    session.add(eval_run)
+    session.commit()
+    session.refresh(eval_run)
+    return eval_run

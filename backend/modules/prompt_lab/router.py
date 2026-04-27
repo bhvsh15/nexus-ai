@@ -17,6 +17,12 @@ class CommitVersionRequest(BaseModel):
 class PromoteRequest(BaseModel):
     stage: str
 
+class RenderPromptRequest(BaseModel):
+    variables: dict
+    
+class RunEvalRequest(BaseModel):
+    variables: dict
+    model: str = "llama3.2"
 
 router = APIRouter()
 
@@ -48,3 +54,19 @@ def read_prompt_versions(prompt_id: int, session: SessionDep):
 @router.patch("/prompts/{prompt_id}/versions/{version_id}/promote", response_model=PromptVersion)
 def promote_prompt_version(version_id: int, body: PromoteRequest, session: SessionDep):
     return service.promote_version(session, version_id, body.stage)
+
+@router.post("/prompts/{prompt_id}/versions/{version_id}/render")
+def render_prompt_version(version_id: int, request: RenderPromptRequest, session: SessionDep):
+    version = service.get_version(session, version_id)
+    if not version:
+        raise HTTPException(status_code=404, detail="PromptVersion not found")
+    
+    rendered = service.render_prompt(version.content, request.variables)
+    return {"rendered_prompt": rendered}
+
+@router.post("/prompts/{prompt_id}/versions/{version_id}/eval")
+def run_eval(version_id: int, body: RunEvalRequest, session: SessionDep):
+    try:
+        return service.run_eval(session, version_id, body.variables, body.model)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
