@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+.env
+
+# SQLite
+*.sqlite3
+*.db
+
+# Chroma
+chroma_data/
+
+# Node
+node_modules/
+.next/
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
