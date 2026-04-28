@@ -12,3 +12,4 @@ pypdf
 ragas
 datasets
 langchain-ollama
+crewai
