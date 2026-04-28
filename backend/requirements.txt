@@ -4,3 +4,9 @@ ollama
 FastAPI
 uvicorn[standard]
 jinja2
+chromadb
+langchain
+langchain-community
+langchain-text-splitters
+pypdf
+ragas
