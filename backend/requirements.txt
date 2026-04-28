@@ -11,3 +11,4 @@ langchain-text-splitters
 pypdf
 ragas
 datasets
+langchain-ollama
