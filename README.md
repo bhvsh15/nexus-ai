@@ -41,12 +41,12 @@ Build, test, and compare RAG pipelines visually.
 - RAGAS evaluation: faithfulness, answer relevancy, context precision, context recall (coming)
 - Pipeline comparison: run same questions on different configs, see which wins
 
-### Agent Builder 🔜
+### Agent Builder ✅
 Visual LangGraph agent construction.
-- Define nodes: LLM call, tool call, router, human-in-the-loop
-- Built-in tools: web scraper, calculator, Python executor, file reader
-- Watch node-by-node execution live via SSE streaming
-- Every run saved as a trace
+- Create agents with a name, model, and a set of tools
+- Built-in tool registry: calculator, echo (web scraper + Python executor coming)
+- Run agents and stream execution live via SSE — watch each node fire in real time
+- Every run and each step saved as a trace in the DB
 
 ### Crew Studio 🔜
 Multi-agent orchestration with CrewAI.
@@ -68,7 +68,7 @@ The nerve center — aggregates data from all modules.
 |---|---|
 | Prompt Lab | ✅ Complete |
 | RAG Studio | 🔧 In Progress |
-| Agent Builder | 🔜 Coming |
+| Agent Builder | ✅ Complete |
 | Crew Studio | 🔜 Coming |
 | Observability | 🔜 Coming |
 
@@ -143,6 +143,17 @@ Interactive docs at `http://localhost:8000/docs`
 | POST | `/pipelines/{id}/ingest` | Upload and ingest a document |
 | POST | `/pipelines/{id}/query` | Query the pipeline |
 
+### Agent Builder `/api/agent-builder`
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/agents` | Create an agent |
+| GET | `/agents` | List all agents |
+| GET | `/agents/{id}` | Get an agent |
+| GET | `/agents/{id}/run?input=...` | Run agent, stream steps via SSE |
+| GET | `/agents/{id}/runs/{run_id}` | Get a run |
+| GET | `/agents/{id}/runs/{run_id}/steps` | Get all steps of a run |
+
 ---
 
 ## Project Structure
@@ -173,7 +184,7 @@ nexus-ai/
 - [x] Prompt Lab — full module
 - [x] RAG Studio — ingestion + query
 - [ ] RAG Studio — RAGAS eval metrics
-- [ ] Agent Builder — LangGraph + SSE streaming
+- [x] Agent Builder — LangGraph + SSE streaming
 - [ ] Crew Studio — CrewAI orchestration
 - [ ] Observability Dashboard
 - [ ] Frontend — Next.js 14
