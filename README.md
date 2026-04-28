@@ -25,13 +25,52 @@ NexusAI brings all of it into one platform that runs on your laptop — no API k
 
 ## What It Does
 
-| Module | Status | Description |
-|---|---|---|
-| Prompt Lab | ✅ Complete | Prompt versioning, Jinja2 templating, A/B testing, LLM-as-judge eval, deployment API |
-| RAG Studio | 🔧 In Progress | Document ingestion, ChromaDB retrieval, pipeline querying, RAGAS eval |
-| Agent Builder | 🔜 Coming | LangGraph agents, tool registry, live SSE trace streaming |
-| Crew Studio | 🔜 Coming | CrewAI multi-agent orchestration, real-time collaboration trace |
-| Observability | 🔜 Coming | LLM call tracking, latency, cost estimation, alerts |
+### Prompt Lab ✅
+A full prompt engineering workbench — not just a playground.
+- Git-style versioning: commit, diff, rollback prompts
+- Jinja2 templating: `{{role}}`, `{{context}}`, `{{language}}`
+- LLM-as-judge scoring: Ollama evaluates Ollama's own outputs (0–1 score + reason)
+- Stage promotion: draft → staging → production workflow
+- Deployment API: `GET /api/prompt-lab/prompts/{name}/production` — any external app fetches the live prompt
+
+### RAG Studio 🔧
+Build, test, and compare RAG pipelines visually.
+- Upload documents (PDF, MD, TXT) and configure chunking + embedding model
+- ChromaDB vector storage with Ollama embeddings
+- Query pipeline: retrieve relevant chunks, generate grounded answers
+- RAGAS evaluation: faithfulness, answer relevancy, context precision, context recall (coming)
+- Pipeline comparison: run same questions on different configs, see which wins
+
+### Agent Builder 🔜
+Visual LangGraph agent construction.
+- Define nodes: LLM call, tool call, router, human-in-the-loop
+- Built-in tools: web scraper, calculator, Python executor, file reader
+- Watch node-by-node execution live via SSE streaming
+- Every run saved as a trace
+
+### Crew Studio 🔜
+Multi-agent orchestration with CrewAI.
+- Create agents with name, role, goal, backstory, tools, model
+- Assign tasks and assemble crews with sequential or hierarchical process
+- Watch agents collaborate in real time
+- Save crews as reusable templates
+
+### Observability Dashboard 🔜
+The nerve center — aggregates data from all modules.
+- Every LLM call tracked: model, latency, token count, prompt, response
+- Cost estimator (even for local models — compute time based)
+- Prompt performance over time, RAG health monitor, agent reliability stats
+- Alerts when eval scores drop below threshold
+
+---
+
+| Module | Status |
+|---|---|
+| Prompt Lab | ✅ Complete |
+| RAG Studio | 🔧 In Progress |
+| Agent Builder | 🔜 Coming |
+| Crew Studio | 🔜 Coming |
+| Observability | 🔜 Coming |
 
 ---
 
