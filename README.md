@@ -2,6 +2,25 @@
 
 A local-first AI engineering platform. One app that replaces LangSmith, LangFuse, PromptLayer, RAGAS Dashboard, and CrewAI Studio — fully open source, running entirely on your machine.
 
+> Built as a portfolio project to demonstrate production-grade AI engineering — not just calling an API, but versioning, evaluating, tracing, and orchestrating AI systems end to end.
+
+---
+
+## The Problem
+
+AI engineers today juggle 5+ paid tools just to manage prompts, evaluate RAG pipelines, monitor agents, and orchestrate multi-agent systems. These tools are expensive, cloud-dependent, and siloed.
+
+NexusAI brings all of it into one platform that runs on your laptop — no API keys, no cloud costs, no vendor lock-in. Just Ollama + your machine.
+
+---
+
+## Why This Is Different
+
+- **Fully local** — all LLM calls go through Ollama. Your data never leaves your machine.
+- **Production patterns** — prompt versioning like git, RAGAS evaluation, OpenTelemetry traces, LLM-as-judge scoring. These are real production concerns, not toy demos.
+- **5 tools in one** — instead of switching between LangSmith, LangFuse, RAGAS, CrewAI Studio, and PromptLayer, everything lives in one unified platform.
+- **One command to run** — `docker compose up` and you're live.
+
 ---
 
 ## What It Does
