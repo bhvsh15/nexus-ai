@@ -48,12 +48,12 @@ Visual LangGraph agent construction.
 - Run agents and stream execution live via SSE — watch each node fire in real time
 - Every run and each step saved as a trace in the DB
 
-### Crew Studio 🔜
+### Crew Studio ✅
 Multi-agent orchestration with CrewAI.
-- Create agents with name, role, goal, backstory, tools, model
-- Assign tasks and assemble crews with sequential or hierarchical process
-- Watch agents collaborate in real time
-- Save crews as reusable templates
+- Create agents with role, goal, backstory, and Ollama model
+- Create tasks with descriptions and expected outputs, assigned to specific agents
+- Assemble crews with sequential or hierarchical process
+- Run crews and get a full collaborative output saved to DB
 
 ### Observability Dashboard 🔜
 The nerve center — aggregates data from all modules.
@@ -69,7 +69,7 @@ The nerve center — aggregates data from all modules.
 | Prompt Lab | ✅ Complete |
 | RAG Studio | 🔧 In Progress |
 | Agent Builder | ✅ Complete |
-| Crew Studio | 🔜 Coming |
+| Crew Studio | ✅ Complete |
 | Observability | 🔜 Coming |
 
 ---
@@ -154,6 +154,19 @@ Interactive docs at `http://localhost:8000/docs`
 | GET | `/agents/{id}/runs/{run_id}` | Get a run |
 | GET | `/agents/{id}/runs/{run_id}/steps` | Get all steps of a run |
 
+### Crew Studio `/api/crew-studio`
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/agents` | Create a crew agent |
+| GET | `/agents` | List all crew agents |
+| POST | `/tasks` | Create a task |
+| GET | `/tasks` | List all tasks |
+| POST | `/crews` | Create a crew |
+| GET | `/crews` | List all crews |
+| GET | `/crews/{id}` | Get a crew |
+| POST | `/crews/{id}/run` | Run a crew |
+
 ---
 
 ## Project Structure
@@ -185,7 +198,7 @@ nexus-ai/
 - [x] RAG Studio — ingestion + query
 - [ ] RAG Studio — RAGAS eval metrics
 - [x] Agent Builder — LangGraph + SSE streaming
-- [ ] Crew Studio — CrewAI orchestration
+- [x] Crew Studio — CrewAI orchestration
 - [ ] Observability Dashboard
 - [ ] Frontend — Next.js 14
 - [ ] Auth — JWT + API keys
