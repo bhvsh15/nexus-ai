@@ -25,5 +25,8 @@ node_modules/
 .vscode/
 .idea/
 
-#Claude
+# Claude
 MEMORY.md
+.claude/
+graphify-out/
+changes.md

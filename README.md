@@ -185,7 +185,7 @@ nexus-ai/
 │   │   ├── crew_studio/       # CrewAI integration
 │   │   └── observability/     # OTel, metrics, alerts
 │   └── main.py
-├── frontend/                  # Next.js 14 (coming)
+├── frontend/                  # Next.js 14 + shadcn/ui (in progress)
 └── docker-compose.yml         # One-command startup (coming)
 ```
 
@@ -199,6 +199,7 @@ nexus-ai/
 - [ ] RAG Studio — RAGAS eval metrics
 - [x] Agent Builder — LangGraph + SSE streaming
 - [x] Crew Studio — CrewAI orchestration
+- [x] Frontend — Next.js 14 + shadcn/ui (Prompt Lab UI done)
 - [ ] Observability Dashboard
 - [ ] Frontend — Next.js 14
 - [ ] Auth — JWT + API keys
