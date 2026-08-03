@@ -1,0 +1,86 @@
+{
+  "summary": {
+    "ignored": 2,
+    "unsupported": 14
+  },
+  "totalSkippedFiles": 16,
+  "unsupportedExtensions": {
+    ".svg": 5,
+    ".bin": 4,
+    ".md": 2,
+    ".css": 1,
+    ".ico": 1,
+    ".tmp": 1
+  },
+  "ignoredDirectories": [
+    ".git",
+    "backend/__pycache__",
+    "logs"
+  ],
+  "files": [
+    {
+      "path": "MEMORY.md",
+      "reason": "ignored"
+    },
+    {
+      "path": "backend/chroma_db/201f463e-989c-4a64-9c4d-d8d6a2c385ae/data_level0.bin",
+      "reason": "unsupported"
+    },
+    {
+      "path": "backend/chroma_db/201f463e-989c-4a64-9c4d-d8d6a2c385ae/header.bin",
+      "reason": "unsupported"
+    },
+    {
+      "path": "backend/chroma_db/201f463e-989c-4a64-9c4d-d8d6a2c385ae/length.bin",
+      "reason": "unsupported"
+    },
+    {
+      "path": "backend/chroma_db/201f463e-989c-4a64-9c4d-d8d6a2c385ae/link_lists.bin",
+      "reason": "unsupported"
+    },
+    {
+      "path": "frontend/AGENTS.md",
+      "reason": "unsupported"
+    },
+    {
+      "path": "frontend/CLAUDE.md",
+      "reason": "unsupported"
+    },
+    {
+      "path": "frontend/app/favicon.ico",
+      "reason": "unsupported"
+    },
+    {
+      "path": "frontend/app/globals.css",
+      "reason": "unsupported"
+    },
+    {
+      "path": "frontend/package-lock.json",
+      "reason": "ignored"
+    },
+    {
+      "path": "frontend/public/file.svg",
+      "reason": "unsupported"
+    },
+    {
+      "path": "frontend/public/globe.svg",
+      "reason": "unsupported"
+    },
+    {
+      "path": "frontend/public/next.svg",
+      "reason": "unsupported"
+    },
+    {
+      "path": "frontend/public/vercel.svg",
+      "reason": "unsupported"
+    },
+    {
+      "path": "frontend/public/window.svg",
+      "reason": "unsupported"
+    },
+    {
+      "path": "nexus-ai-project-analysis.ndjson.gz.body.tmp",
+      "reason": "unsupported"
+    }
+  ]
+}
